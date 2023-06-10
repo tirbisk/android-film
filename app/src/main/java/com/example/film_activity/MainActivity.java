@@ -3,8 +3,11 @@ package com.example.film_activity;
 import androidx.appcompat.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
-
 import android.widget.TextView;
+import android.widget.ImageView;
+
+import com.squareup.picasso.Picasso;
+
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -32,6 +35,12 @@ public class MainActivity extends AppCompatActivity {
 
                         TextView titleTextView = findViewById(R.id.titleTextView);
                         TextView overviewTextView = findViewById(R.id.overviewTextView);
+
+                        ImageView posterImageView = findViewById(R.id.posterImageView);
+
+                        // Utilisez une bibliothèque tierce, comme Picasso ou Glide, pour charger l'image depuis l'URL
+                        String posterUrl = "https://image.tmdb.org/t/p/w500" + movie.getPosterPath();
+                        Picasso.get().load(posterUrl).into(posterImageView);
 
                         titleTextView.setText(movie.getTitle());
                         overviewTextView.setText(movie.getOverview());

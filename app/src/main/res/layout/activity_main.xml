@@ -20,4 +20,12 @@
         android:layout_height="wrap_content"
         android:paddingBottom="8dp"/>
 
+    <ImageView
+        android:id="@+id/posterImageView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:layout_centerHorizontal="true"
+        android:contentDescription="Movie Poster" />
+
 </LinearLayout>
