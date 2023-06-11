@@ -11,8 +11,6 @@ public class MovieResponse {
     @SerializedName("results")
     private List<Movie> results;
 
-    // Ajoutez d'autres attributs si nécessaire
-
     public int getPage() {
         return page;
     }
