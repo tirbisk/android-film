@@ -1,3 +1,23 @@
 <resources>
     <string name="app_name">Film-activity</string>
+    <string name="login_page">Login Page</string>
+    <string name="username">Username</string>
+    <string name="password">Password</string>
+    <string name="login">Login</string>
+    <string name="create_account">create account</string>
+    <string name="submit">submit</string>
+    <string name="born_date">Born date</string>
+    <string name="select_date">Select Date</string>
+    <string name="birth_date">Birth date</string>
+    <string name="profil">profil</string>
+    <string name="change_password">Change Password</string>
+    <string name="new_password">new password</string>
+    <string name="save">save</string>
+    <string name="liste">Liste</string>
+    <string name="watchlist">Watchlist</string>
+    <string name="film_list">film list</string>
+    <string name="add_picture">add picture</string>
+    <string name="change_profile_picture">change profile picture</string>
+    <string name="select_a_picture">select a picture</string>
+    <string name="take_a_picture">take a picture</string>
 </resources>
