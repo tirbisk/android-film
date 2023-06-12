@@ -1,7 +1,6 @@
 package com.example.film_activity;
 
 
-import android.content.Context;
 import android.content.SharedPreferences;
 import android.media.Image;
 import android.os.Handler;
@@ -10,22 +9,30 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import com.google.gson.Gson;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.Date;
+import java.util.Locale;
 
 
 public class UserManagement extends AppCompatActivity {
     private final SharedPreferences sharedPreferences;
-    private Handler sessionTimeoutHandler;
-    private Runnable sessionTimeoutRunnable;
+    private final Handler sessionTimeoutHandler;
+    private final Runnable sessionTimeoutRunnable;
     private static final String SESSION_KEY = "SessionKey";
 
     public UserManagement(SharedPreferences sharedPreferences) {
         this.sharedPreferences = sharedPreferences;
+        sessionTimeoutHandler = new Handler();
+        this.sessionTimeoutRunnable = () -> {
+
+        };
     }
 
     public User createUser(String name, String password, String date) {
-        ArrayList<String> watchlist = new ArrayList<>();
+        ArrayList<Movie> watchlist = new ArrayList<>();
         User user = new User(name, password, date, watchlist, 600000);
         saveUser(user);
 
@@ -98,7 +105,9 @@ public class UserManagement extends AppCompatActivity {
     }
 
     private void stopSessionTimer() {
-        sessionTimeoutHandler.removeCallbacks(sessionTimeoutRunnable);
+        if (sessionTimeoutHandler != null) {
+            sessionTimeoutHandler.removeCallbacks(sessionTimeoutRunnable);
+        }
     }
 
     public User login(String username, String password) {
@@ -139,5 +148,46 @@ public class UserManagement extends AppCompatActivity {
             }
         }
         return null;
+    }
+
+    public void addMovieToWatchList(String username, Movie movie) {
+        String json = sharedPreferences.getString(username, null);
+        if (json != null) {
+            Gson gson = new Gson();
+            User user = gson.fromJson(json, User.class);
+            if (user != null) {
+                user.addToWatchList(movie);
+                saveUser(user);
+            }
+        }
+    }
+
+    public void removeMovieFromWatchList(String username, int index) {
+        String json = sharedPreferences.getString(username, null);
+        if (json != null) {
+            Gson gson = new Gson();
+            User user = gson.fromJson(json, User.class);
+            if (user != null) {
+                user.removeFromWatchList(index);
+                saveUser(user);
+            }
+        }
+    }
+
+    public boolean checkIfUserIs18(String birthDateString) throws ParseException {
+        Calendar currentDate = Calendar.getInstance();
+        Calendar birthDate = Calendar.getInstance();
+        SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy", Locale.getDefault());
+
+        birthDate.setTime(sdf.parse(birthDateString));
+
+        int age = currentDate.get(Calendar.YEAR) - birthDate.get(Calendar.YEAR);
+        if (currentDate.get(Calendar.MONTH) < birthDate.get(Calendar.MONTH)
+                || (currentDate.get(Calendar.MONTH) == birthDate.get(Calendar.MONTH)
+                && currentDate.get(Calendar.DAY_OF_MONTH) < birthDate.get(Calendar.DAY_OF_MONTH))) {
+            age--;
+        }
+
+        return age > 18;
     }
 }

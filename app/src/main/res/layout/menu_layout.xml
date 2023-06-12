@@ -10,7 +10,7 @@
         android:layout_height="match_parent"
         android:layout_weight="1"
         android:text="@string/film_list"
-        android:onClick="handleClickFilmListButton"
+        android:onClick="handleClickMovieListButton"
         android:textColor="@android:color/white" />
 
     <Button

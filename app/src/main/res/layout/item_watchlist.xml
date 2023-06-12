@@ -33,6 +33,16 @@
             android:textSize="12sp"
             android:textColor="#808080" />
 
+        <Button
+            android:id="@+id/remove_from_watchlist"
+            android:layout_width="wrap_content"
+            android:layout_height="0dp"
+            android:layout_weight="1"
+            android:onClick="handleClickRemoveFromWatchlist"
+            android:text="@string/remove_from_watchlist" />
+
+
     </LinearLayout>
+
 
 </LinearLayout>

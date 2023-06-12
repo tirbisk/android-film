@@ -6,6 +6,7 @@ public class Movie {
     @SerializedName("title")
     private String title;
 
+    public int id;
     @SerializedName("overview")
     private String overview;
 
@@ -17,6 +18,14 @@ public class Movie {
 
     public String getTitle() {
         return title;
+    }
+
+    public Movie(String title, int id, String overview, String releaseDate, String posterPath) {
+        this.title = title;
+        this.id = id;
+        this.overview = overview;
+        this.releaseDate = releaseDate;
+        this.posterPath = posterPath;
     }
 
     public void setTitle(String title) {
@@ -45,5 +54,12 @@ public class Movie {
 
     public void setPosterPath(String posterPath) {
         this.posterPath = posterPath;
+    }
+
+    public int getId() {
+        return this.id;
+    }
+    public void setId(int id) {
+        this.id = id;
     }
 }
