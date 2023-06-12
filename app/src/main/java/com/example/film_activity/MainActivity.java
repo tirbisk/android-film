@@ -119,6 +119,7 @@ public class MainActivity extends AppCompatActivity {
 
             if (newUser != null) {
                 userManagement.login(stringUsername, stringPassword);
+                loggedUser = newUser;
                 setContentView(R.layout.movie_display_list);
             }
         } else {
